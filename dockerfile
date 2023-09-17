@@ -7,7 +7,7 @@ RUN apt-get update && \
     rm -rf /var/lib/apt/lists/*
 
 # Copy your PHP website files to the container
-COPY ./your-php-website /var/www/html/
+COPY ./website /var/www/html/
 
 # Expose port 80 for HTTP traffic (if not already exposed in devopsedu/webapp)
 #EXPOSE 80
