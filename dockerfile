@@ -1,11 +1,16 @@
-# Use the base image devopsedu/webapp
+# Use the base image from devopsedu/webapp
 FROM devopsedu/webapp
 
-# Copy your PHP website files into the web server's root directory
-COPY website /var/www/html
+# Install PHP and Apache web server
+RUN apt-get update && \
+    apt-get install -y php apache2 && \
+    rm -rf /var/lib/apt/lists/*
 
-# Expose port 80 (the default HTTP port)
-EXPOSE 80
+# Copy your PHP website files to the container
+COPY ./your-php-website /var/www/html/
 
-# Start the web server
-#CMD ["apache2ctl", "-D", "FOREGROUND"]
+# Expose port 80 for HTTP traffic (if not already exposed in devopsedu/webapp)
+#EXPOSE 80
+
+# Start the Apache web server
+CMD ["apache2ctl", "-D", "FOREGROUND"]
